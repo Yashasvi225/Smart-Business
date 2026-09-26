@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revenue Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="inner-page">
+
+<header class="navbar">
+    <a href="/" class="brand">
+        <div class="brand-mark">SB</div>
+        <div>
+            <strong>Smart Business</strong>
+            <span>Analytics Platform</span>
+        </div>
+    </a>
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="/#platform">Our Platform</a>
+    </nav>
+
+    <a href="/" class="nav-button">Dashboard</a>
+</header>
+
+<section class="page-heading revenue-heading">
+    <div class="page-heading-inner">
+        <small>BUSINESS PREDICTION</small>
+        <h1>Revenue Prediction</h1>
+        <p>Estimate expected monthly revenue using important business factors.</p>
+    </div>
+</section>
+
+<main class="analysis-layout">
+
+    <section class="form-card">
+
+        <div class="card-top">
+            <div class="card-icon green">₹</div>
+
+            <div>
+                <small>REVENUE FORECAST</small>
+                <h2>Enter Business Data</h2>
+            </div>
+        </div>
+
+        <p class="description">
+            Provide your business information to estimate monthly revenue.
+        </p>
+
+        <form action="/predict-revenue" method="POST">
+
+            <label>Number of Customers</label>
+
+            <div class="input-box">
+                <span>♟</span>
+                <input
+                    type="number"
+                    name="customers"
+                    placeholder="Example: 500"
+                    required
+                >
+            </div>
+
+            <label>Advertising Expenditure</label>
+
+            <div class="input-box">
+                <span>₹</span>
+                <input
+                    type="number"
+                    name="advertising"
+                    placeholder="Example: 30000"
+                    required
+                >
+            </div>
+
+            <label>Average Order Value</label>
+
+            <div class="input-box">
+                <span>₹</span>
+                <input
+                    type="number"
+                    name="average_order_value"
+                    placeholder="Example: 650"
+                    required
+                >
+            </div>
+
+            <button type="submit" class="main-button green-button">
+                Predict Revenue →
+            </button>
+
+        </form>
+
+    </section>
+
+    <section class="info-card green-card">
+
+        {% if prediction %}
+
+        <span class="card-label">FORECAST RESULT</span>
+
+        <div class="large-icon">✓</div>
+
+        <h2>Expected Revenue</h2>
+
+        <div class="result-number">
+            ₹{{ prediction }}
+        </div>
+
+        <p>
+            The estimated monthly revenue is calculated from
+            the business information entered.
+        </p>
+
+        <div class="info-list">
+            <div>
+                <span>MODEL</span>
+                <strong>Multiple Linear Regression</strong>
+            </div>
+
+            <div>
+                <span>INPUTS</span>
+                <strong>3 Business Factors</strong>
+            </div>
+
+            <div>
+                <span>OUTPUT</span>
+                <strong>Revenue</strong>
+            </div>
+        </div>
+
+        {% else %}
+
+        <span class="card-label">REVENUE INSIGHT</span>
+
+        <div class="large-icon">₹</div>
+
+        <h2>Revenue Forecast</h2>
+
+        <p>
+            Combine customer count, advertising expenditure
+            and average order value to estimate expected revenue.
+        </p>
+
+        <div class="info-list">
+            <div>
+                <span>INPUT</span>
+                <strong>Customers</strong>
+            </div>
+
+            <div>
+                <span>INPUT</span>
+                <strong>Advertising</strong>
+            </div>
+
+            <div>
+                <span>INPUT</span>
+                <strong>Average Order Value</strong>
+            </div>
+        </div>
+
+        {% endif %}
+
+    </section>
+
+</main>
+
+<footer>
+    <div>
+        <strong>Smart Business Analytics</strong>
+        <p>Revenue forecasting module</p>
+    </div>
+
+    <span>Academic Project</span>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Segmentation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="inner-page">
+
+<header class="navbar">
+    <a href="/" class="brand">
+        <div class="brand-mark">SB</div>
+        <div>
+            <strong>Smart Business</strong>
+            <span>Analytics Platform</span>
+        </div>
+    </a>
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="/#platform">Our Platform</a>
+    </nav>
+
+    <a href="/" class="nav-button">Dashboard</a>
+</header>
+
+<section class="page-heading product-heading">
+    <div class="page-heading-inner">
+        <small>PRODUCT INSIGHTS</small>
+        <h1>Product Segmentation</h1>
+        <p>
+            Discover groups of similar products based on price,
+            sales, ratings and purchase frequency.
+        </p>
+    </div>
+</section>
+
+<main class="analysis-layout">
+
+    <section class="form-card">
+
+        <div class="card-top">
+            <div class="card-icon orange">◇</div>
+
+            <div>
+                <small>PRODUCT ANALYSIS</small>
+                <h2>Analyze Products</h2>
+            </div>
+        </div>
+
+        <p class="description">
+            The system analyzes product information and
+            automatically identifies similar product groups.
+        </p>
+
+        <div class="data-items">
+
+            <div class="data-item">
+                <span>01</span>
+                <div>
+                    <strong>Product Price</strong>
+                    <p>Selling price</p>
+                </div>
+            </div>
+
+            <div class="data-item">
+                <span>02</span>
+                <div>
+                    <strong>Sales Quantity</strong>
+                    <p>Number of products sold</p>
+                </div>
+            </div>
+
+            <div class="data-item">
+                <span>03</span>
+                <div>
+                    <strong>Product Rating</strong>
+                    <p>Customer rating</p>
+                </div>
+            </div>
+
+            <div class="data-item">
+                <span>04</span>
+                <div>
+                    <strong>Purchase Frequency</strong>
+                    <p>Number of purchases</p>
+                </div>
+            </div>
+
+        </div>
+
+        <form action="/segment-products" method="POST">
+            <button type="submit" class="main-button orange-button">
+                Analyze Products →
+            </button>
+        </form>
+
+    </section>
+
+    <section class="info-card orange-card">
+
+        {% if clusters %}
+
+        <span class="card-label">SEGMENTATION RESULT</span>
+
+        <div class="large-icon">◇</div>
+
+        <h2>Product Groups</h2>
+
+        <p>
+            Similar products have been grouped according
+            to their business characteristics.
+        </p>
+
+        <div class="group-grid">
+
+            {% for cluster in clusters %}
+
+            <div class="group-card">
+                <span>GROUP {{ cluster.number }}</span>
+                <strong>{{ cluster.count }}</strong>
+                <p>Products</p>
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        <div class="info-list">
+            <div>
+                <span>METHOD</span>
+                <strong>Hierarchical Clustering</strong>
+            </div>
+
+            <div>
+                <span>GROUPS</span>
+                <strong>3</strong>
+            </div>
+        </div>
+
+        {% else %}
+
+        <span class="card-label">PRODUCT INSIGHT</span>
+
+        <div class="large-icon">◇</div>
+
+        <h2>Product Groups</h2>
+
+        <p>
+            Analyze your product dataset to discover
+            similar products and their patterns.
+        </p>
+
+        <div class="info-list">
+            <div>
+                <span>INPUT</span>
+                <strong>Product Data</strong>
+            </div>
+
+            <div>
+                <span>OUTPUT</span>
+                <strong>Product Groups</strong>
+            </div>
+
+            <div>
+                <span>METHOD</span>
+                <strong>Hierarchical</strong>
+            </div>
+        </div>
+
+        {% endif %}
+
+    </section>
+
+</main>
+
+<footer>
+    <div>
+        <strong>Smart Business Analytics</strong>
+        <p>Product segmentation module</p>
+    </div>
+
+    <span>Academic Project</span>
+</footer>
+
+</body>
+</html>

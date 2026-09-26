@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="inner-page">
+
+<header class="navbar">
+    <a href="/" class="brand">
+        <div class="brand-mark">SB</div>
+        <div>
+            <strong>Smart Business</strong>
+            <span>Analytics Platform</span>
+        </div>
+    </a>
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="/#platform">Our Platform</a>
+    </nav>
+
+    <a href="/" class="nav-button">Dashboard</a>
+</header>
+
+<section class="page-heading sales-heading">
+    <div class="page-heading-inner">
+        <small>BUSINESS PREDICTION</small>
+        <h1>Sales Prediction</h1>
+        <p>Estimate expected sales based on advertising expenditure.</p>
+    </div>
+</section>
+
+<main class="analysis-layout">
+
+    <section class="form-card">
+        <div class="card-top">
+            <div class="card-icon blue">₹</div>
+            <div>
+                <small>SALES FORECAST</small>
+                <h2>Enter Business Data</h2>
+            </div>
+        </div>
+
+        <p class="description">
+            Enter your advertising expenditure to estimate expected sales.
+        </p>
+
+        <form action="/predict-sales" method="POST">
+
+            <label>Advertising Expenditure</label>
+
+            <div class="input-box">
+                <span>₹</span>
+                <input
+                    type="number"
+                    name="advertising"
+                    placeholder="Example: 50"
+                    required
+                >
+            </div>
+
+            <span class="hint">
+                Enter the amount spent on advertising.
+            </span>
+
+            <button type="submit" class="main-button">
+                Predict Sales →
+            </button>
+
+        </form>
+    </section>
+
+    <section class="info-card blue-card">
+
+        {% if prediction %}
+
+        <span class="card-label">FORECAST RESULT</span>
+
+        <div class="large-icon">✓</div>
+
+        <h2>Expected Sales</h2>
+
+        <div class="result-number">
+            {{ prediction }}
+        </div>
+
+        <p>
+            Based on the advertising expenditure entered,
+            the estimated sales value is shown above.
+        </p>
+
+        <div class="info-list">
+            <div>
+                <span>MODEL</span>
+                <strong>Linear Regression</strong>
+            </div>
+
+            <div>
+                <span>INPUT</span>
+                <strong>Advertising</strong>
+            </div>
+
+            <div>
+                <span>OUTPUT</span>
+                <strong>Expected Sales</strong>
+            </div>
+        </div>
+
+        {% else %}
+
+        <span class="card-label">SALES INSIGHT</span>
+
+        <div class="large-icon">↗</div>
+
+        <h2>Sales Forecast</h2>
+
+        <p>
+            Use advertising investment as an input to estimate
+            expected sales and support business planning.
+        </p>
+
+        <div class="info-list">
+            <div>
+                <span>INPUT</span>
+                <strong>Advertising</strong>
+            </div>
+
+            <div>
+                <span>OUTPUT</span>
+                <strong>Sales</strong>
+            </div>
+
+            <div>
+                <span>METHOD</span>
+                <strong>Linear Regression</strong>
+            </div>
+        </div>
+
+        {% endif %}
+
+    </section>
+
+</main>
+
+<footer>
+    <div>
+        <strong>Smart Business Analytics</strong>
+        <p>Sales forecasting module</p>
+    </div>
+
+    <span>Academic Project</span>
+</footer>
+
+</body>
+</html>
