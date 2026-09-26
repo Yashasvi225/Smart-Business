@@ -1,29 +1,11 @@
-# ============================================
-# CUSTOMER SEGMENTATION
-# K-Means Clustering using R
-# ============================================
-
-
-# Load customer data
 data <- read.csv("datasets/customers.csv")
 
-
-# Select features for clustering
 customer_features <- data[
-    c(
-        "Age",
-        "AnnualIncome",
-        "SpendingScore",
-        "PurchaseFrequency"
-    )
+    c("Age", "AnnualIncome", "SpendingScore", "PurchaseFrequency")
 ]
 
-
-# Scale the data
 scaled_data <- scale(customer_features)
 
-
-# Apply K-Means
 set.seed(123)
 
 kmeans_model <- kmeans(
@@ -32,74 +14,39 @@ kmeans_model <- kmeans(
     nstart = 25
 )
 
+args <- commandArgs(trailingOnly = TRUE)
 
-# Add cluster number
-data$Cluster <- kmeans_model$cluster
+if (length(args) < 4) {
+    cat("Please provide Age, AnnualIncome, SpendingScore and PurchaseFrequency")
+} else {
 
+    age <- as.numeric(args[1])
+    income <- as.numeric(args[2])
+    spending <- as.numeric(args[3])
+    frequency <- as.numeric(args[4])
 
-# Get cluster information
-cluster_counts <- table(data$Cluster)
-
-
-# Print results
-cat("Customer Segmentation Results\n\n")
-
-
-for (i in 1:3) {
-
-    count <- cluster_counts[as.character(i)]
-
-    cat(
-        paste0(
-            "Cluster ",
-            i,
-            ": ",
-            count,
-            " customers\n"
-        )
-    )
-}
-
-
-cat("\n")
-
-
-# Calculate cluster characteristics
-for (i in 1:3) {
-
-    cluster_data <- data[data$Cluster == i, ]
-
-    avg_age <- round(mean(cluster_data$Age), 1)
-
-    avg_income <- round(
-        mean(cluster_data$AnnualIncome),
-        0
+    new_customer <- data.frame(
+        Age = age,
+        AnnualIncome = income,
+        SpendingScore = spending,
+        PurchaseFrequency = frequency
     )
 
-    avg_spending <- round(
-        mean(cluster_data$SpendingScore),
-        1
+    scaled_new <- scale(
+        new_customer,
+        center = attr(scaled_data, "scaled:center"),
+        scale = attr(scaled_data, "scaled:scale")
     )
 
-    avg_frequency <- round(
-        mean(cluster_data$PurchaseFrequency),
-        1
+    distances <- apply(
+        kmeans_model$centers,
+        1,
+        function(center) {
+            sqrt(sum((as.numeric(scaled_new[1, ]) - center)^2))
+        }
     )
 
+    new_cluster <- which.min(distances)
 
-    cat(
-        paste0(
-            "Cluster ",
-            i,
-            " | Age: ",
-            avg_age,
-            " | Income: ₹",
-            avg_income,
-            " | Spending: ",
-            avg_spending,
-            " | Frequency: ",
-            avg_frequency,
-            "\n"
-        )
-    )
+    cat(new_cluster)
 }

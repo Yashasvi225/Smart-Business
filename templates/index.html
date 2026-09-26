@@ -7,189 +7,278 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
-<body>
+<body class="home-page">
 
-<header class="navbar">
-    <a href="/" class="brand">
-        <div class="brand-mark">SB</div>
-        <div>
-            <strong>Smart Business</strong>
-            <span>Analytics Platform</span>
-        </div>
-    </a>
+<nav class="topbar">
+    <div class="brand">
+        <span class="brand-mark">BA</span>
+        <span>Smart Business Analytics</span>
+    </div>
 
-    <nav>
-        <a href="/">Home</a>
-        <a href="#platform">Platform</a>
-        <a href="#about">About</a>
-    </nav>
+    <div class="nav-links">
+        <a href="/" class="selected">Home</a>
+        <a href="/sales">Sales</a>
+        <a href="/revenue">Revenue</a>
+        <a href="/customer">Customers</a>
+        <a href="/product">Products</a>
+    </div>
+</nav>
 
-    <a href="#platform" class="nav-button">Explore Platform</a>
-</header>
 
 <section class="hero">
+
     <div class="hero-content">
-        <div class="eyebrow">✦ BUSINESS ANALYTICS PLATFORM</div>
+
+        <div class="hero-label">
+            BUSINESS ANALYTICS PLATFORM
+        </div>
 
         <h1>
-            Turn your business data
-            <span>into smarter decisions.</span>
+            Turn business data<br>
+            into smarter decisions.
         </h1>
 
         <p>
-            Understand customers, discover product patterns,
-            forecast sales and estimate future revenue from one simple platform.
+            Predict sales and revenue, understand customer
+            behaviour, and discover product patterns through
+            one integrated analytics platform.
         </p>
 
-        <div class="hero-buttons">
-            <a href="#platform" class="primary-button">Explore Platform →</a>
-            <a href="#about" class="secondary-button">Learn More</a>
+        <div class="hero-actions">
+            <a href="#tools" class="hero-button">
+                Explore Tools <span>→</span>
+            </a>
+
+            <a href="#about" class="hero-text-link">
+                About Platform
+            </a>
         </div>
 
-        <div class="hero-stats">
-            <div>
-                <strong>04</strong>
-                <span>Business Tools</span>
-            </div>
-
-            <div>
-                <strong>02</strong>
-                <span>Prediction Tools</span>
-            </div>
-
-            <div>
-                <strong>02</strong>
-                <span>Customer Insights</span>
-            </div>
-        </div>
     </div>
 
-    <div class="hero-box">
-        <div class="dashboard-window">
-            <div class="window-top">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
 
-            <div class="dashboard-title">
-                <small>BUSINESS OVERVIEW</small>
-                <h3>Performance</h3>
-            </div>
+    <div class="hero-panel">
 
-            <div class="mini-stat">
-                <span>Sales Growth</span>
-                <strong>+24.8%</strong>
-            </div>
-
-            <div class="mini-stat">
-                <span>Customers</span>
-                <strong>12.4K</strong>
-            </div>
-
-            <div class="mini-stat">
-                <span>Revenue</span>
-                <strong>₹8.6L</strong>
-            </div>
-
-            <div class="fake-chart">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
+        <div class="panel-top">
+            <span>BUSINESS SNAPSHOT</span>
+            <span class="live-dot">● LIVE</span>
         </div>
+
+        <div class="snapshot-item">
+            <span>SALES ANALYSIS</span>
+            <strong>01</strong>
+        </div>
+
+        <div class="snapshot-item">
+            <span>REVENUE ANALYSIS</span>
+            <strong>02</strong>
+        </div>
+
+        <div class="snapshot-item">
+            <span>CUSTOMER INSIGHTS</span>
+            <strong>03</strong>
+        </div>
+
+        <div class="snapshot-item">
+            <span>PRODUCT INSIGHTS</span>
+            <strong>04</strong>
+        </div>
+
+        <div class="panel-bottom">
+            <span>04 ANALYTICS MODULES</span>
+            <span>READY</span>
+        </div>
+
     </div>
+
 </section>
 
-<section class="platform" id="platform">
-    <div class="section-heading">
-        <div>
-            <small>OUR PLATFORM</small>
-            <h2>Everything you need to understand your business.</h2>
-        </div>
+
+<section class="tools-section" id="tools">
+
+    <div class="section-intro">
+        <span>01 / ANALYTICS TOOLS</span>
+
+        <h2>
+            Explore the tools<br>
+            built for business data.
+        </h2>
+    </div>
+
+
+    <div class="tool-list">
+
+        <a href="/sales" class="tool-item sales-tool">
+
+            <div class="tool-index">01</div>
+
+            <div class="tool-content">
+                <span>FORECASTING</span>
+                <h3>Sales Prediction</h3>
+                <p>
+                    Estimate expected sales using advertising
+                    investment and historical sales data.
+                </p>
+            </div>
+
+            <div class="tool-arrow">↗</div>
+
+        </a>
+
+
+        <a href="/revenue" class="tool-item revenue-tool">
+
+            <div class="tool-index">02</div>
+
+            <div class="tool-content">
+                <span>FORECASTING</span>
+                <h3>Revenue Prediction</h3>
+                <p>
+                    Estimate revenue using customers,
+                    advertising and average order value.
+                </p>
+            </div>
+
+            <div class="tool-arrow">↗</div>
+
+        </a>
+
+
+        <a href="/customer" class="tool-item customer-tool">
+
+            <div class="tool-index">03</div>
+
+            <div class="tool-content">
+                <span>CUSTOMER INSIGHTS</span>
+                <h3>Customer Segmentation</h3>
+                <p>
+                    Identify customer groups using income,
+                    spending and purchase behaviour.
+                </p>
+            </div>
+
+            <div class="tool-arrow">↗</div>
+
+        </a>
+
+
+        <a href="/product" class="tool-item product-tool">
+
+            <div class="tool-index">04</div>
+
+            <div class="tool-content">
+                <span>PRODUCT INSIGHTS</span>
+                <h3>Product Segmentation</h3>
+                <p>
+                    Discover product groups using price,
+                    sales, ratings and purchase frequency.
+                </p>
+            </div>
+
+            <div class="tool-arrow">↗</div>
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<section class="about-section" id="about">
+
+    <div class="about-number">
+        02
+    </div>
+
+    <div class="about-content">
+
+        <span>ABOUT THE PLATFORM</span>
+
+        <h2>
+            One place to understand
+            different parts of a business.
+        </h2>
 
         <p>
-            Explore simple business tools designed to turn everyday
-            data into useful insights.
+            Smart Business Analytics brings together prediction
+            and segmentation tools in one platform. Users can
+            enter business information, send it through the
+            backend, and receive an analysis result.
         </p>
-    </div>
 
-    <div class="tool-grid">
-
-        <a href="/sales" class="tool-card blue-tool">
-            <div class="tool-number">01</div>
-            <div class="tool-icon">↗</div>
-            <small>FORECASTING</small>
-            <h3>Sales Prediction</h3>
-            <p>
-                Estimate future sales using advertising investment
-                and historical business data.
-            </p>
-            <span class="tool-link">Explore Sales →</span>
-        </a>
-
-        <a href="/revenue" class="tool-card green-tool">
-            <div class="tool-number">02</div>
-            <div class="tool-icon">₹</div>
-            <small>FORECASTING</small>
-            <h3>Revenue Prediction</h3>
-            <p>
-                Estimate expected revenue using customers,
-                advertising and average order value.
-            </p>
-            <span class="tool-link">Explore Revenue →</span>
-        </a>
-
-        <a href="/customer" class="tool-card purple-tool">
-            <div class="tool-number">03</div>
-            <div class="tool-icon">◎</div>
-            <small>CUSTOMER INSIGHTS</small>
-            <h3>Customer Segmentation</h3>
-            <p>
-                Discover groups of customers based on income,
-                spending and purchasing behavior.
-            </p>
-            <span class="tool-link">Explore Customers →</span>
-        </a>
-
-        <a href="/product" class="tool-card orange-tool">
-            <div class="tool-number">04</div>
-            <div class="tool-icon">◇</div>
-            <small>PRODUCT INSIGHTS</small>
-            <h3>Product Segmentation</h3>
-            <p>
-                Discover similar product groups using price,
-                sales, ratings and purchase frequency.
-            </p>
-            <span class="tool-link">Explore Products →</span>
-        </a>
+        <p>
+            The platform combines a simple web interface with
+            Python backend processing, business datasets and
+            R-based analysis.
+        </p>
 
     </div>
+
 </section>
 
-<section class="about" id="about">
-    <div>
-        <small>ABOUT THE PROJECT</small>
-        <h2>One platform. Four business perspectives.</h2>
+
+<section class="overview-section">
+
+    <div class="overview-heading">
+
+        <span>03 / PLATFORM OVERVIEW</span>
+
+        <h2>
+            Everything connected<br>
+            in one platform.
+        </h2>
+
     </div>
 
-    <p>
-        Smart Business Analytics combines prediction and segmentation
-        techniques to help understand business data and support
-        data-driven decisions.
-    </p>
+
+    <div class="overview-grid">
+
+        <div class="overview-box">
+            <strong>04</strong>
+            <span>Analytics Tools</span>
+            <p>
+                Sales, revenue, customer and product analysis.
+            </p>
+        </div>
+
+        <div class="overview-box">
+            <strong>02</strong>
+            <span>Prediction Tools</span>
+            <p>
+                Sales and revenue prediction from business inputs.
+            </p>
+        </div>
+
+        <div class="overview-box">
+            <strong>02</strong>
+            <span>Segmentation Tools</span>
+            <p>
+                Customer and product grouping based on data.
+            </p>
+        </div>
+
+        <div class="overview-box">
+            <strong>01</strong>
+            <span>Integrated Backend</span>
+            <p>
+                Website connected with Python and R processing.
+            </p>
+        </div>
+
+    </div>
+
 </section>
+
 
 <footer>
+
     <div>
         <strong>Smart Business Analytics</strong>
-        <p>Turning business data into meaningful insights.</p>
+        <span>Business Intelligence Platform</span>
     </div>
 
-    <span>Academic Project</span>
+    <span>© 2026</span>
+
 </footer>
 
 </body>

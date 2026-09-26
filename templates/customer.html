@@ -7,183 +7,176 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
-<body class="inner-page">
+<body class="analysis-page customer-page">
 
-<header class="navbar">
-    <a href="/" class="brand">
-        <div class="brand-mark">SB</div>
-        <div>
-            <strong>Smart Business</strong>
-            <span>Analytics Platform</span>
-        </div>
-    </a>
-
-    <nav>
-        <a href="/">Home</a>
-        <a href="/#platform">Our Platform</a>
-    </nav>
-
-    <a href="/" class="nav-button">Dashboard</a>
-</header>
-
-<section class="page-heading customer-heading">
-    <div class="page-heading-inner">
-        <small>CUSTOMER INSIGHTS</small>
-        <h1>Customer Segmentation</h1>
-        <p>
-            Discover groups of customers based on their income,
-            spending and purchasing behavior.
-        </p>
+<nav class="topbar">
+    <div class="brand">
+        <span class="brand-mark">BA</span>
+        <span>Smart Business Analytics</span>
     </div>
-</section>
+
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/sales">Sales</a>
+        <a href="/revenue">Revenue</a>
+        <a href="/customer" class="selected">Customers</a>
+        <a href="/product">Products</a>
+    </div>
+</nav>
 
 <main class="analysis-layout">
 
-    <section class="form-card">
+    <section class="analysis-intro">
 
-        <div class="card-top">
-            <div class="card-icon purple">◎</div>
+        <div class="module-number">03</div>
+
+        <div class="intro-content">
+            <span>CUSTOMER INSIGHTS</span>
+
+            <h1>
+                Customer<br>
+                Segmentation
+            </h1>
+
+            <p>
+                Enter customer information to identify
+                the customer's business group.
+            </p>
+        </div>
+
+        <div class="intro-footer">
+            <div>
+                <small>INPUTS</small>
+                <strong>04</strong>
+            </div>
 
             <div>
-                <small>CUSTOMER ANALYSIS</small>
-                <h2>Analyze Customers</h2>
+                <small>OUTPUT</small>
+                <strong>GROUP</strong>
             </div>
         </div>
-
-        <p class="description">
-            The system analyzes customer data and automatically
-            identifies similar customer groups.
-        </p>
-
-        <div class="data-items">
-
-            <div class="data-item">
-                <span>01</span>
-                <div>
-                    <strong>Age</strong>
-                    <p>Customer age</p>
-                </div>
-            </div>
-
-            <div class="data-item">
-                <span>02</span>
-                <div>
-                    <strong>Annual Income</strong>
-                    <p>Customer yearly income</p>
-                </div>
-            </div>
-
-            <div class="data-item">
-                <span>03</span>
-                <div>
-                    <strong>Spending Score</strong>
-                    <p>Spending behavior</p>
-                </div>
-            </div>
-
-            <div class="data-item">
-                <span>04</span>
-                <div>
-                    <strong>Purchase Frequency</strong>
-                    <p>Number of purchases</p>
-                </div>
-            </div>
-
-        </div>
-
-        <form action="/segment-customers" method="POST">
-            <button type="submit" class="main-button purple-button">
-                Analyze Customers →
-            </button>
-        </form>
 
     </section>
 
-    <section class="info-card purple-card">
 
-        {% if clusters %}
+    <section class="analysis-workspace">
 
-        <span class="card-label">SEGMENTATION RESULT</span>
-
-        <div class="large-icon">◎</div>
-
-        <h2>Customer Groups</h2>
-
-        <p>
-            Customers have been grouped according to
-            similar purchasing characteristics.
-        </p>
-
-        <div class="group-grid">
-
-            {% for cluster in clusters %}
-
-            <div class="group-card">
-                <span>GROUP {{ cluster.number }}</span>
-                <strong>{{ cluster.count }}</strong>
-                <p>Customers</p>
+        <div class="workspace-header">
+            <div>
+                <span>ENTER INFORMATION</span>
+                <h2>Customer Details</h2>
             </div>
 
-            {% endfor %}
-
+            <div class="status">● READY</div>
         </div>
 
-        <div class="info-list">
-            <div>
-                <span>METHOD</span>
-                <strong>K-Means Clustering</strong>
+        <form action="/segment-customers" method="POST">
+
+            <div class="field-grid">
+
+                <div class="field">
+                    <label>01 / AGE</label>
+
+                    <input
+                        type="number"
+                        name="age"
+                        placeholder="Enter age"
+                        required
+                    >
+                </div>
+
+                <div class="field">
+                    <label>02 / ANNUAL INCOME</label>
+
+                    <input
+                        type="number"
+                        name="income"
+                        placeholder="Enter annual income"
+                        required
+                    >
+                </div>
+
+                <div class="field">
+                    <label>03 / SPENDING SCORE</label>
+
+                    <input
+                        type="number"
+                        name="spending"
+                        placeholder="Enter spending score"
+                        required
+                    >
+                </div>
+
+                <div class="field">
+                    <label>04 / PURCHASE FREQUENCY</label>
+
+                    <input
+                        type="number"
+                        name="frequency"
+                        placeholder="Enter frequency"
+                        required
+                    >
+                </div>
+
             </div>
 
-            <div>
-                <span>GROUPS</span>
-                <strong>3</strong>
+            <button type="submit">
+                Analyze Customer
+                <span>→</span>
+            </button>
+
+        </form>
+
+
+        <div class="output-area">
+
+            <div class="output-title">
+                <span>ANALYSIS OUTPUT</span>
+                <div class="line"></div>
             </div>
+
+            {% if cluster %}
+
+            <div class="output-result">
+
+                <div>
+                    <small>ASSIGNED GROUP</small>
+
+                    <div class="group-number">
+                        {{ cluster }}
+                    </div>
+                </div>
+
+                <div class="output-text">
+                    <h3>Customer Group {{ cluster }}</h3>
+
+                    <p>
+                        The entered customer has been assigned
+                        to Group {{ cluster }} based on the
+                        existing customer data.
+                    </p>
+                </div>
+
+            </div>
+
+            {% else %}
+
+            <div class="empty-output">
+                <span>—</span>
+
+                <p>
+                    Enter customer information above
+                    to generate the result.
+                </p>
+            </div>
+
+            {% endif %}
+
         </div>
-
-        {% else %}
-
-        <span class="card-label">CUSTOMER INSIGHT</span>
-
-        <div class="large-icon">◎</div>
-
-        <h2>Customer Groups</h2>
-
-        <p>
-            Analyze your customer dataset to discover groups
-            with similar purchasing behavior.
-        </p>
-
-        <div class="info-list">
-            <div>
-                <span>INPUT</span>
-                <strong>Customer Data</strong>
-            </div>
-
-            <div>
-                <span>OUTPUT</span>
-                <strong>Customer Groups</strong>
-            </div>
-
-            <div>
-                <span>METHOD</span>
-                <strong>K-Means</strong>
-            </div>
-        </div>
-
-        {% endif %}
 
     </section>
 
 </main>
-
-<footer>
-    <div>
-        <strong>Smart Business Analytics</strong>
-        <p>Customer segmentation module</p>
-    </div>
-
-    <span>Academic Project</span>
-</footer>
 
 </body>
 </html>

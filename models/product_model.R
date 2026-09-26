@@ -1,130 +1,70 @@
-# ============================================
-# PRODUCT SEGMENTATION
-# Hierarchical Clustering using R
-# ============================================
-
-
-# Load product data
 data <- read.csv("datasets/products.csv")
 
-
-# Select features
 product_features <- data[
-    c(
-        "Price",
-        "SalesQuantity",
-        "Rating",
-        "PurchaseFrequency"
-    )
+    c("Price", "SalesQuantity", "Rating", "PurchaseFrequency")
 ]
 
-
-# Scale the features
 scaled_data <- scale(product_features)
 
-
-# Calculate distance matrix
 distance_matrix <- dist(
     scaled_data,
     method = "euclidean"
 )
 
-
-# Perform hierarchical clustering
 hierarchical_model <- hclust(
     distance_matrix,
     method = "ward.D2"
 )
 
-
-# Create 3 clusters
 clusters <- cutree(
     hierarchical_model,
     k = 3
 )
 
-
-# Add cluster information
-data$Cluster <- clusters
-
-
-# Count products in each cluster
-cluster_counts <- table(
-    data$Cluster
+cluster_centers <- t(
+    sapply(
+        1:3,
+        function(i) {
+            colMeans(
+                scaled_data[clusters == i, , drop = FALSE]
+            )
+        }
+    )
 )
 
+args <- commandArgs(trailingOnly = TRUE)
 
-# Print results
-cat("Product Segmentation Results\n\n")
+if (length(args) < 4) {
+    cat("Please provide Price, SalesQuantity, Rating and PurchaseFrequency")
+} else {
 
+    price <- as.numeric(args[1])
+    sales <- as.numeric(args[2])
+    rating <- as.numeric(args[3])
+    frequency <- as.numeric(args[4])
 
-for (i in 1:3) {
-
-    count <- cluster_counts[
-        as.character(i)
-    ]
-
-    cat(
-        paste0(
-            "Cluster ",
-            i,
-            ": ",
-            count,
-            " products\n"
-        )
-    )
-}
-
-
-cat("\n")
-
-
-# Calculate cluster characteristics
-
-for (i in 1:3) {
-
-    cluster_data <- data[
-        data$Cluster == i,
-    ]
-
-
-    avg_price <- round(
-        mean(cluster_data$Price),
-        2
+    new_product <- data.frame(
+        Price = price,
+        SalesQuantity = sales,
+        Rating = rating,
+        PurchaseFrequency = frequency
     )
 
-
-    avg_sales <- round(
-        mean(cluster_data$SalesQuantity),
-        2
+    scaled_new <- scale(
+        new_product,
+        center = attr(scaled_data, "scaled:center"),
+        scale = attr(scaled_data, "scaled:scale")
     )
 
-
-    avg_rating <- round(
-        mean(cluster_data$Rating),
-        2
+    distances <- apply(
+        cluster_centers,
+        1,
+        function(center) {
+            sqrt(sum((as.numeric(scaled_new[1, ]) - center)^2))
+        }
     )
 
+    new_cluster <- which.min(distances)
 
-    avg_frequency <- round(
-        mean(cluster_data$PurchaseFrequency),
-        2
-    )
-
-
-    cat(
-        paste0(
-            "Cluster ",
-            i,
-            " | Price: ₹",
-            avg_price,
-            " | Sales: ",
-            avg_sales,
-            " | Rating: ",
-            avg_rating,
-            " | Frequency: ",
-            avg_frequency,
-            "\n"
-        )
-    )
+    cat(new_cluster)
 }

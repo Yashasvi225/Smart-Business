@@ -7,183 +7,179 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
-<body class="inner-page">
+<body class="analysis-page product-page">
 
-<header class="navbar">
-    <a href="/" class="brand">
-        <div class="brand-mark">SB</div>
-        <div>
-            <strong>Smart Business</strong>
-            <span>Analytics Platform</span>
-        </div>
-    </a>
-
-    <nav>
-        <a href="/">Home</a>
-        <a href="/#platform">Our Platform</a>
-    </nav>
-
-    <a href="/" class="nav-button">Dashboard</a>
-</header>
-
-<section class="page-heading product-heading">
-    <div class="page-heading-inner">
-        <small>PRODUCT INSIGHTS</small>
-        <h1>Product Segmentation</h1>
-        <p>
-            Discover groups of similar products based on price,
-            sales, ratings and purchase frequency.
-        </p>
+<nav class="topbar">
+    <div class="brand">
+        <span class="brand-mark">BA</span>
+        <span>Smart Business Analytics</span>
     </div>
-</section>
+
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/sales">Sales</a>
+        <a href="/revenue">Revenue</a>
+        <a href="/customer">Customers</a>
+        <a href="/product" class="selected">Products</a>
+    </div>
+</nav>
 
 <main class="analysis-layout">
 
-    <section class="form-card">
+    <section class="analysis-intro">
 
-        <div class="card-top">
-            <div class="card-icon orange">◇</div>
+        <div class="module-number">04</div>
+
+        <div class="intro-content">
+            <span>PRODUCT INSIGHTS</span>
+
+            <h1>
+                Product<br>
+                Segmentation
+            </h1>
+
+            <p>
+                Enter product information to identify
+                the product's business group.
+            </p>
+        </div>
+
+        <div class="intro-footer">
+            <div>
+                <small>INPUTS</small>
+                <strong>04</strong>
+            </div>
 
             <div>
-                <small>PRODUCT ANALYSIS</small>
-                <h2>Analyze Products</h2>
+                <small>OUTPUT</small>
+                <strong>GROUP</strong>
             </div>
         </div>
-
-        <p class="description">
-            The system analyzes product information and
-            automatically identifies similar product groups.
-        </p>
-
-        <div class="data-items">
-
-            <div class="data-item">
-                <span>01</span>
-                <div>
-                    <strong>Product Price</strong>
-                    <p>Selling price</p>
-                </div>
-            </div>
-
-            <div class="data-item">
-                <span>02</span>
-                <div>
-                    <strong>Sales Quantity</strong>
-                    <p>Number of products sold</p>
-                </div>
-            </div>
-
-            <div class="data-item">
-                <span>03</span>
-                <div>
-                    <strong>Product Rating</strong>
-                    <p>Customer rating</p>
-                </div>
-            </div>
-
-            <div class="data-item">
-                <span>04</span>
-                <div>
-                    <strong>Purchase Frequency</strong>
-                    <p>Number of purchases</p>
-                </div>
-            </div>
-
-        </div>
-
-        <form action="/segment-products" method="POST">
-            <button type="submit" class="main-button orange-button">
-                Analyze Products →
-            </button>
-        </form>
 
     </section>
 
-    <section class="info-card orange-card">
 
-        {% if clusters %}
+    <section class="analysis-workspace">
 
-        <span class="card-label">SEGMENTATION RESULT</span>
-
-        <div class="large-icon">◇</div>
-
-        <h2>Product Groups</h2>
-
-        <p>
-            Similar products have been grouped according
-            to their business characteristics.
-        </p>
-
-        <div class="group-grid">
-
-            {% for cluster in clusters %}
-
-            <div class="group-card">
-                <span>GROUP {{ cluster.number }}</span>
-                <strong>{{ cluster.count }}</strong>
-                <p>Products</p>
+        <div class="workspace-header">
+            <div>
+                <span>ENTER INFORMATION</span>
+                <h2>Product Details</h2>
             </div>
 
-            {% endfor %}
-
+            <div class="status">● READY</div>
         </div>
 
-        <div class="info-list">
-            <div>
-                <span>METHOD</span>
-                <strong>Hierarchical Clustering</strong>
+        <form action="/segment-products" method="POST">
+
+            <div class="field-grid">
+
+                <div class="field">
+                    <label>01 / PRICE</label>
+
+                    <input
+                        type="number"
+                        name="price"
+                        placeholder="₹ 0"
+                        required
+                    >
+                </div>
+
+                <div class="field">
+                    <label>02 / SALES QUANTITY</label>
+
+                    <input
+                        type="number"
+                        name="sales"
+                        placeholder="0"
+                        required
+                    >
+                </div>
+
+                <div class="field">
+                    <label>03 / RATING</label>
+
+                    <input
+                        type="number"
+                        name="rating"
+                        step="0.1"
+                        min="0"
+                        max="5"
+                        placeholder="0.0"
+                        required
+                    >
+                </div>
+
+                <div class="field">
+                    <label>04 / PURCHASE FREQUENCY</label>
+
+                    <input
+                        type="number"
+                        name="frequency"
+                        placeholder="0"
+                        required
+                    >
+                </div>
+
             </div>
 
-            <div>
-                <span>GROUPS</span>
-                <strong>3</strong>
+            <button type="submit">
+                Analyze Product
+                <span>→</span>
+            </button>
+
+        </form>
+
+
+        <div class="output-area">
+
+            <div class="output-title">
+                <span>ANALYSIS OUTPUT</span>
+                <div class="line"></div>
             </div>
+
+            {% if cluster %}
+
+            <div class="output-result">
+
+                <div>
+                    <small>ASSIGNED GROUP</small>
+
+                    <div class="group-number">
+                        {{ cluster }}
+                    </div>
+                </div>
+
+                <div class="output-text">
+                    <h3>Product Group {{ cluster }}</h3>
+
+                    <p>
+                        The entered product has been assigned
+                        to Group {{ cluster }} based on the
+                        existing product data.
+                    </p>
+                </div>
+
+            </div>
+
+            {% else %}
+
+            <div class="empty-output">
+                <span>—</span>
+
+                <p>
+                    Enter product information above
+                    to generate the result.
+                </p>
+            </div>
+
+            {% endif %}
+
         </div>
-
-        {% else %}
-
-        <span class="card-label">PRODUCT INSIGHT</span>
-
-        <div class="large-icon">◇</div>
-
-        <h2>Product Groups</h2>
-
-        <p>
-            Analyze your product dataset to discover
-            similar products and their patterns.
-        </p>
-
-        <div class="info-list">
-            <div>
-                <span>INPUT</span>
-                <strong>Product Data</strong>
-            </div>
-
-            <div>
-                <span>OUTPUT</span>
-                <strong>Product Groups</strong>
-            </div>
-
-            <div>
-                <span>METHOD</span>
-                <strong>Hierarchical</strong>
-            </div>
-        </div>
-
-        {% endif %}
 
     </section>
 
 </main>
-
-<footer>
-    <div>
-        <strong>Smart Business Analytics</strong>
-        <p>Product segmentation module</p>
-    </div>
-
-    <span>Academic Project</span>
-</footer>
 
 </body>
 </html>

@@ -7,153 +7,140 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
-<body class="inner-page">
+<body class="analysis-page sales-page">
 
-<header class="navbar">
-    <a href="/" class="brand">
-        <div class="brand-mark">SB</div>
-        <div>
-            <strong>Smart Business</strong>
-            <span>Analytics Platform</span>
-        </div>
-    </a>
-
-    <nav>
-        <a href="/">Home</a>
-        <a href="/#platform">Our Platform</a>
-    </nav>
-
-    <a href="/" class="nav-button">Dashboard</a>
-</header>
-
-<section class="page-heading sales-heading">
-    <div class="page-heading-inner">
-        <small>BUSINESS PREDICTION</small>
-        <h1>Sales Prediction</h1>
-        <p>Estimate expected sales based on advertising expenditure.</p>
+<nav class="topbar">
+    <div class="brand">
+        <span class="brand-mark">BA</span>
+        <span>Smart Business Analytics</span>
     </div>
-</section>
+
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/sales" class="selected">Sales</a>
+        <a href="/revenue">Revenue</a>
+        <a href="/customer">Customers</a>
+        <a href="/product">Products</a>
+    </div>
+</nav>
 
 <main class="analysis-layout">
 
-    <section class="form-card">
-        <div class="card-top">
-            <div class="card-icon blue">₹</div>
+    <section class="analysis-intro">
+
+        <div class="module-number">01</div>
+
+        <div class="intro-content">
+            <span>SALES FORECASTING</span>
+
+            <h1>
+                Sales<br>
+                Prediction
+            </h1>
+
+            <p>
+                Enter advertising investment to estimate
+                expected sales using historical business data.
+            </p>
+        </div>
+
+        <div class="intro-footer">
             <div>
-                <small>SALES FORECAST</small>
-                <h2>Enter Business Data</h2>
+                <small>INPUT</small>
+                <strong>01</strong>
+            </div>
+
+            <div>
+                <small>OUTPUT</small>
+                <strong>SALES</strong>
             </div>
         </div>
 
-        <p class="description">
-            Enter your advertising expenditure to estimate expected sales.
-        </p>
+    </section>
+
+
+    <section class="analysis-workspace">
+
+        <div class="workspace-header">
+            <div>
+                <span>ENTER INFORMATION</span>
+                <h2>Sales Details</h2>
+            </div>
+
+            <div class="status">● READY</div>
+        </div>
 
         <form action="/predict-sales" method="POST">
 
-            <label>Advertising Expenditure</label>
+            <div class="single-field">
 
-            <div class="input-box">
-                <span>₹</span>
+                <label>01 / ADVERTISING INVESTMENT</label>
+
                 <input
                     type="number"
                     name="advertising"
-                    placeholder="Example: 50"
+                    placeholder="Enter advertising amount"
                     required
                 >
+
             </div>
 
-            <span class="hint">
-                Enter the amount spent on advertising.
-            </span>
-
-            <button type="submit" class="main-button">
-                Predict Sales →
+            <button type="submit">
+                Predict Sales
+                <span>→</span>
             </button>
 
         </form>
-    </section>
 
-    <section class="info-card blue-card">
 
-        {% if prediction %}
+        <div class="output-area">
 
-        <span class="card-label">FORECAST RESULT</span>
+            <div class="output-title">
+                <span>ANALYSIS OUTPUT</span>
+                <div class="line"></div>
+            </div>
 
-        <div class="large-icon">✓</div>
+            {% if prediction %}
 
-        <h2>Expected Sales</h2>
+            <div class="output-result">
 
-        <div class="result-number">
-            {{ prediction }}
+                <div>
+                    <small>PREDICTED SALES</small>
+
+                    <div class="big-result">
+                        {{ prediction }}
+                    </div>
+                </div>
+
+                <div class="output-text">
+                    <h3>Estimated Sales</h3>
+
+                    <p>
+                        The estimated sales value is calculated
+                        from the entered advertising investment.
+                    </p>
+                </div>
+
+            </div>
+
+            {% else %}
+
+            <div class="empty-output">
+                <span>—</span>
+
+                <p>
+                    Enter advertising investment above
+                    to generate the prediction.
+                </p>
+            </div>
+
+            {% endif %}
+
         </div>
-
-        <p>
-            Based on the advertising expenditure entered,
-            the estimated sales value is shown above.
-        </p>
-
-        <div class="info-list">
-            <div>
-                <span>MODEL</span>
-                <strong>Linear Regression</strong>
-            </div>
-
-            <div>
-                <span>INPUT</span>
-                <strong>Advertising</strong>
-            </div>
-
-            <div>
-                <span>OUTPUT</span>
-                <strong>Expected Sales</strong>
-            </div>
-        </div>
-
-        {% else %}
-
-        <span class="card-label">SALES INSIGHT</span>
-
-        <div class="large-icon">↗</div>
-
-        <h2>Sales Forecast</h2>
-
-        <p>
-            Use advertising investment as an input to estimate
-            expected sales and support business planning.
-        </p>
-
-        <div class="info-list">
-            <div>
-                <span>INPUT</span>
-                <strong>Advertising</strong>
-            </div>
-
-            <div>
-                <span>OUTPUT</span>
-                <strong>Sales</strong>
-            </div>
-
-            <div>
-                <span>METHOD</span>
-                <strong>Linear Regression</strong>
-            </div>
-        </div>
-
-        {% endif %}
 
     </section>
 
 </main>
-
-<footer>
-    <div>
-        <strong>Smart Business Analytics</strong>
-        <p>Sales forecasting module</p>
-    </div>
-
-    <span>Academic Project</span>
-</footer>
 
 </body>
 </html>
